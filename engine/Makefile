@@ -1,7 +1,7 @@
 # Created by doxakis 1
 # Grug chess engine
 
-
+#TODO: make debug build
 LIB_DIR := ./lib/
 SRC_DIR := ./src/
 NAME := grug_engine
