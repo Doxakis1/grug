@@ -6,9 +6,9 @@ LIB_DIR := ./lib/
 SRC_DIR := ./src/
 NAME := grug_engine
 COMPILER := gcc
-COMPILER_FLAGS := -O3
+COMPILER_FLAGS := -O3 -Wall -Wextra -Werror
 INCLUDES := -I./src 
-LINKER_FLAGS := -O3
+LINKER_FLAGS := -O3 -Wall -Wextra -Werror
 
 # Source files and object files wildcarded to include all c files in src/
 SOURCE_FILES := $(wildcard src/*.c)

@@ -11,7 +11,7 @@ char *trim_left_over(size_t pos, size_t size) {
 		return trim_left_over;
 	}
 	char *new_left_over = malloc(size - pos + 1);
-	for (size_t i = pos; pos <= size; i++) {
+	for (size_t i = pos; i <= size; i++) {
 		new_left_over[i - pos] = left_over[pos + i];
 	}
 	left_over[pos] = '\0';
@@ -41,7 +41,7 @@ char *get_next_chunk(int fd){
 	if (new_buffer == NULL) {
 		return NULL;
 	}
-	ssize_t bytes_read = read(fd, new_buffer, 13);
+	ssize_t bytes_read = read(fd, new_buffer, 13); //TODO: change this to BUFFER_SIZE once bug is fixed
 	if (bytes_read == -1) {
 		free(new_buffer);
 		return NULL;
@@ -63,6 +63,13 @@ ssize_t check_has_nl(char *str) {
 }
 
 char *append_and_free(char *string1, char *string2){
+	if (string1 == NULL) {
+		__builtin_unreachable();
+		return NULL; // should never be reached
+	}
+	if (string2 == NULL) {
+		return string1;
+	}
 	size_t string1_len = strlen(string1);
 	size_t string2_len = strlen(string2);
 	char *con_string = malloc(string1_len + string2_len);
@@ -81,12 +88,12 @@ char *append_and_free(char *string1, char *string2){
 		pos++;
 	}
 	con_string[pos] = '\0';
-	return NULL;
+	return con_string;
 }
 
-char *strip_left_overs(char *string){
+static char *strip_left_overs(char *string){
 	if (left_over != NULL) {
-		// We should never reach this state #TODO: maybe assert
+		__builtin_unreachable();
 		free(string);
 		return NULL;
 	}
